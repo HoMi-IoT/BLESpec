@@ -1,6 +1,6 @@
-import testapi.*;
+
 
 module bleSpec {
-	requires testapi;
-	exports org.homi.plugin.spec;
+	requires org.homi.plugin.specification;
+	exports org.homi.plugin.BLEspec;
 }
