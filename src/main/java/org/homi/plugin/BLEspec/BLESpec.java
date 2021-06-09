@@ -1,4 +1,5 @@
 package org.homi.plugin.BLEspec;
+import org.homi.plugin.api.observer.IObserver;
 import org.homi.plugin.specification.*;
 import org.homi.plugin.specification.ISpecification;
 import static org.homi.plugin.specification.Constraints.*;
@@ -13,6 +14,7 @@ import org.homi.plugin.specification.types.TypeDef;
 class Types{
 	static TypeDef<String> mac = defineType(String.class, notNull(), minLength(17), maxLength(17));
 	static TypeDef<String> gattServOrChar = defineType(String.class, notNull());
+	static TypeDef<IObserver> observer = defineType(IObserver.class, notNull());
 }
 @SpecificationID(id = "BLESpec")
 public enum BLESpec implements ISpecification{
@@ -21,7 +23,8 @@ public enum BLESpec implements ISpecification{
 	DISCONNECT(Boolean.class, Types.mac),
 	PAIR(Boolean.class, Types.mac),
 	READ(Byte[].class, Types.mac, Types.gattServOrChar, Types.gattServOrChar),
-	WRITE(Boolean.class, Types.mac, Byte[].class, Types.gattServOrChar, Types.gattServOrChar);
+	WRITE(Boolean.class, Types.mac, Byte[].class, Types.gattServOrChar, Types.gattServOrChar),
+	LISTEN(Void.class, Types.mac, Types.gattServOrChar, Types.gattServOrChar, Types.observer);
 
 
 		/*RETURN_NULL(Void.class),
@@ -62,7 +65,7 @@ public enum BLESpec implements ISpecification{
 			return this.returnType;
 		}
 		
-	}
+}
 	
 
 
