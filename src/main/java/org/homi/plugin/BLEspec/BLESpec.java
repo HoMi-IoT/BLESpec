@@ -7,6 +7,7 @@ import static org.homi.plugin.specification.SpecificationHelper.defineType;
 import static org.homi.plugin.specification.SpecificationHelper.defineSerializableType;
 
 import java.util.List;
+import java.util.Map;
 
 import org.homi.plugin.specification.SpecificationHelper;
 import org.homi.plugin.specification.SpecificationID;
@@ -15,6 +16,7 @@ class Types{
 	static TypeDef<String> mac = defineType(String.class, notNull(), minLength(17), maxLength(17));
 	static TypeDef<String> gattServOrChar = defineType(String.class, notNull());
 	static TypeDef<IObserver> observer = defineType(IObserver.class, notNull());
+	static TypeDef<Map> deviceInfo = defineType(Map.class, notNull());
 }
 @SpecificationID(id = "BLESpec")
 public enum BLESpec implements ISpecification{
@@ -24,7 +26,8 @@ public enum BLESpec implements ISpecification{
 	PAIR(Boolean.class, Types.mac),
 	READ(Byte[].class, Types.mac, Types.gattServOrChar, Types.gattServOrChar),
 	WRITE(Boolean.class, Types.mac, Byte[].class, Types.gattServOrChar, Types.gattServOrChar),
-	LISTEN(Void.class, Types.mac, Types.gattServOrChar, Types.gattServOrChar, Types.observer);
+	LISTEN(Void.class, Types.mac, Types.gattServOrChar, Types.gattServOrChar, Types.observer),
+	GET_DEVICE_INFO(Types.deviceInfo);
 
 
 		/*RETURN_NULL(Void.class),
